@@ -1,5 +1,5 @@
 ## typescript type challenge book
 
-用于学习
+用于学习book
 
-后续把 type-challenge 搭进去
+练习[type-challenge](https://github.com/type-challenges/type-challenges/blob/main/README.zh-CN.md)
