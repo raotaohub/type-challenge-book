@@ -1,12 +1,9 @@
-
-
-## 类型守护
-
+# 类型守护
 
 
 ```ts
 interface A {
- 
+
  	a:[]
 
 }
@@ -32,21 +29,19 @@ if(typeof data.a === 'array'){
 ```
 
 
-
-
-
 ## 获取 interface 子项类型
-
 
 
 **example**
 
 ```tsx
+
 type ItemType = IWorkOrderListResult['list'][0];
 
 const array = ['a', '1', true];
 type ItemType = (typeof array)[number];       // string | number | boolean
 type ItemTypeString = (typeof array)[0];        // string
+
 ```
 
 

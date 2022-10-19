@@ -3,7 +3,10 @@
 > 重在积累😀
 
 ## 学习记录
-- [book](https://github.com/raotaohub/type-challenge-book/book)
+- [book](./book/book.md)
+
+### 内置泛型工具
+- [`Record`](./usage%20example/base/Record.md)
 
 ## 练习
 - [type-challenge](https://github.com/type-challenges/type-challenges/blob/main/README.zh-CN.md)
