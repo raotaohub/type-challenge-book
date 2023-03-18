@@ -154,4 +154,40 @@ type DeepReadonly2<T extends object> = {
 
 type res14 = DeepReadonly2<{ a: "1"; b: { b: "2" }; c: () => void }>;
 
+// !DeepRecord 索引类型——对象类型的递归
+type DeepRecord<O extends Record<string, any>> = {
+  [Key in keyof O]: O[Key] extends Record<string, any>
+    ? DeepRecord<O[Key]> & Record<string, any>
+    : O[Key]} & Record<string, any>
+
+type Data = {
+  a:number
+  b:string
+  c:{
+    d:number
+    e:string
+  }
+}
+
+const data1:Data ={
+  a:1,
+  b:'string',
+  c:{
+    d:1,
+    e:'string',
+    f:1
+  }
+} 
+
+const data2:DeepRecord<Data> ={
+  a:1,
+  b:'string',
+  c:{
+    d:1,
+    e:'string',
+    f:1
+  }
+} 
+
+
 export {};

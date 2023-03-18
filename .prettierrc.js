@@ -6,7 +6,7 @@
  * npx prettier --write .
  */
 module.exports = {
-    printWidth: 60,
+    printWidth: 100,
     semi: false, // 在语句末尾打印分号(默认ture)
     singleQuote: true, // 使用单引号
     jsxSingleQuote: true, // 在jsx中也使用单引号
