@@ -1,4 +1,4 @@
-import { isA } from "./types"
+import { isA } from './types'
 
 export interface A {
   platformKey: string
@@ -10,13 +10,15 @@ export interface B {
   // ...
 }
 
-
 function fn(params: A | B) {
-if (isA(params)){
-  var id = params.platformKey
-}
-  
-  var id = params.shopId
+  // Question
+  var id = params.shopId // warn
+  var id = params.platformKey // warn
+
+  // Solve
+  if (isA(params)) {
+    var id = params.platformKey // pass
+  }
 
   const myFetch = (id: string) => {
     return new Promise<string>((resolve, reject) => {
@@ -25,9 +27,4 @@ if (isA(params)){
       })
     })
   }
-
 }
-
-
-
-
