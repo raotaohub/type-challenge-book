@@ -50,4 +50,6 @@ type Read<T> = {
   [K in keyof T]: T[K]
 }
 
+export type NoVoidValue<T> = T extends void ? never : T; /* if else */
+
 export default Read
