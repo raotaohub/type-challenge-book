@@ -1,3 +1,6 @@
+/**
+ * @description: 字符串转换元组 StringToTuple<'123'> 推导 ['1','2','3']
+ */
 export type StringToTuple<
   S extends string,
   Res extends string[] = []
@@ -5,6 +8,9 @@ export type StringToTuple<
   ? StringToTuple<Rest, [...Res, F]>
   : Res
 
+/**
+ * @description: 元组转换联合类型 TupleToUn<['1','2','3']> 推导 '1'|'2'|'3'
+ */
 export type TupleToUn<
   T extends unknown[],
   V = never
@@ -12,6 +18,9 @@ export type TupleToUn<
   ? TupleToUn<Rest, Val | V>
   : V
 
+/**
+ * @description: 
+ */
 export type Join<
   T extends string,
   K extends string = ','
@@ -21,8 +30,11 @@ export type Join<
     : `${S}${K}${Join<R, K>}`
   : ''
 
+/**
+ * @description: 将字符串元组类型，转换成按指定string分割的string字面量类型 Split<['1','2','3'],'='> 推导 "3=2=1="
+ */
 export type Split<
-  T extends unknown[],
+  T extends string[],
   Chunk extends string = '',
   Res extends string = ''
 > = T extends [infer F, ...infer R]
@@ -32,6 +44,7 @@ export type Split<
       : Res
     : Res
   : Res
+
 
 type Read<T> = {
   [K in keyof T]: T[K]
