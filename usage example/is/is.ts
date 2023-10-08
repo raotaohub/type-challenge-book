@@ -1,30 +1,30 @@
-import { isA } from './types'
+import { isA } from './types';
 
 export interface A {
-  platformKey: string
+  platformKey: string;
   // ...
 }
 
 export interface B {
-  shopId: string
+  shopId: string;
   // ...
 }
 
 function fn(params: A | B) {
   // Question
-  var id = params.shopId // warn
-  var id = params.platformKey // warn
+  var id = params.shopId; // warn
+  var id = params.platformKey; // warn
 
   // Solve
   if (isA(params)) {
-    var id = params.platformKey // pass
+    var id = params.platformKey; // pass
   }
 
   const myFetch = (id: string) => {
     return new Promise<string>((resolve, reject) => {
       setTimeout(() => {
-        resolve(id)
-      })
-    })
-  }
+        resolve(id);
+      });
+    });
+  };
 }

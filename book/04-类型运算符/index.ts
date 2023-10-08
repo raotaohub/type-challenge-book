@@ -24,8 +24,12 @@ type Cross1 = one1 & two1; //  string 同类型合并 两个类型相同，交�
 
 /**
  **条件：extends ? : 和 inter 推导 */
-type First<Tuple extends unknown[]> = Tuple extends [infer T, ...infer R] ? T : never;
-type Last<Tuple extends unknown[]> = Tuple extends [...infer R, infer T] ? T : never;
+type First<Tuple extends unknown[]> = Tuple extends [infer T, ...infer R]
+  ? T
+  : never;
+type Last<Tuple extends unknown[]> = Tuple extends [...infer R, infer T]
+  ? T
+  : never;
 
 type first = First<[1, 2, 3]>;
 type last = Last<[1, 2, 3]>;
@@ -34,8 +38,12 @@ type Func = () => first;
 
 type Test = ReturnType<Func>;
 
-type ExcludeFirst<Tuple extends unknown[]> = Tuple extends [infer T, ...infer R] ? R : never;
-type ExcludeLast<Tuple extends unknown[]> = Tuple extends [...infer R, infer T] ? R : never;
+type ExcludeFirst<Tuple extends unknown[]> = Tuple extends [infer T, ...infer R]
+  ? R
+  : never;
+type ExcludeLast<Tuple extends unknown[]> = Tuple extends [...infer R, infer T]
+  ? R
+  : never;
 
 type excludeFirst = ExcludeFirst<[1, 2, 3]>;
 type excludeLast = ExcludeLast<[1, 2, 3]>;
@@ -85,10 +93,10 @@ type StrArrOrNumArr = ToArray<string | number>;
 type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
 type StrArrOrNumArr2 = ToArrayNonDist<string | number>;
 
-type PNonDist<T> = [T] extends ["x"] ? 1 : 2;
+type PNonDist<T> = [T] extends ['x'] ? 1 : 2;
 /**
  * type A4 = 2;
  */
-type A4 = PNonDist<"x" | "y">;
+type A4 = PNonDist<'x' | 'y'>;
 
 export {};

@@ -8,7 +8,7 @@ type res1 = myReadonly<{ a: string; b: string }>;
 
 // !array 数组类型的遍历
 
-const tuple = ["a", "b", "c"] as const;
+const tuple = ['a', 'b', 'c'] as const;
 
 type ArrayToObject<A extends readonly (number | string | symbol)[]> = {
   [P in A[number]]: P;
@@ -23,9 +23,10 @@ type res2 = ArrayToObject<typeof tuple>;
   c: "c";
 } */
 
-type foreachString<T extends string, R extends unknown[] = []> = T extends `${infer F}${infer Rest}`
-  ? foreachString<Rest, [...R, F]>
-  : R;
+type foreachString<
+  T extends string,
+  R extends unknown[] = [],
+> = T extends `${infer F}${infer Rest}` ? foreachString<Rest, [...R, F]> : R;
 
-type res3 = foreachString<'1234567'>
-export { };
+type res3 = foreachString<'1234567'>;
+export {};

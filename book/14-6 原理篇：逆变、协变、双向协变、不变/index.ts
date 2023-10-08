@@ -42,7 +42,7 @@ printName(guang);
 
 //
 
-type res = "1" | "2" extends "1" | "2" | "3" ? true : false;
+type res = '1' | '2' extends '1' | '2' | '3' ? true : false;
 
 // !为了更严格的保证类型安全，ts 添加了 strictFunctionTypes 的编译选项，开启以后函数参数就只支持逆变，否则支持双向协变。
 

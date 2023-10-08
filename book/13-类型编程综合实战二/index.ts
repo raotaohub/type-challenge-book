@@ -7,7 +7,7 @@
  * @Description: 函数重载的三种写法
  */
 
-import { UnionToIntersection } from "../10-特殊特性要记清";
+import { UnionToIntersection } from '../10-特殊特性要记清';
 
 // ? 一 声明
 declare function func1(name: string): string;
@@ -33,9 +33,11 @@ type res = ReturnType<typeof func3>;
 
 // 联合转交叉 拿到联合类型的最后一个类型：
 
-type UnionToFuncIntersection<T> = UnionToIntersection<T extends any ? () => T : never>;
+type UnionToFuncIntersection<T> = UnionToIntersection<
+  T extends any ? () => T : never
+>;
 
-type res2 = ReturnType<UnionToFuncIntersection<"1" | "2">>;
+type res2 = ReturnType<UnionToFuncIntersection<'1' | '2'>>;
 
 type UnionToTuple<T> = UnionToIntersection<
   T extends any ? () => T : never
@@ -43,5 +45,5 @@ type UnionToTuple<T> = UnionToIntersection<
   ? [...UnionToTuple<Exclude<T, ReturnType>>, ReturnType]
   : [];
 
-type res3 = UnionToTuple<keyof { a: "1"; b: "2"; c: "3" }>;
+type res3 = UnionToTuple<keyof { a: '1'; b: '2'; c: '3' }>;
 export {};

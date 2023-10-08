@@ -5,10 +5,12 @@
 type BuildArray<
   Length extends number,
   Val = unknown,
-  Result extends unknown[] = []
-> = Result["length"] extends Length ? Result : BuildArray<Length, Val, [Val, ...Result]>;
+  Result extends unknown[] = [],
+> = Result['length'] extends Length
+  ? Result
+  : BuildArray<Length, Val, [Val, ...Result]>;
 
-type getArrayLength<A extends unknown[]> = A["length"];
+type getArrayLength<A extends unknown[]> = A['length'];
 
 type array = BuildArray<4, 4>;
 type length = getArrayLength<array>;
@@ -25,7 +27,7 @@ type add = Add<1, 1>;
 
 type Subtrac<N1 extends number, N2 extends number> = BuildArray<N1> extends [
   ...BuildArray<N2>,
-  ...infer Rest
+  ...infer Rest,
 ]
   ? getArrayLength<Rest> // 被减去的项 +  剩余的项 = N1 那么剩余的项的数量就是N1-N2的结果
   : never;
@@ -38,7 +40,7 @@ type subtrac = Subtrac<3, 2>;
 type Multipli<
   Multiplier extends number,
   Base extends number,
-  Result extends unknown[] = []
+  Result extends unknown[] = [],
 > = Multiplier extends 0
   ? getArrayLength<Result>
   : Multipli<Subtrac<Multiplier, 1>, Base, [...Result, ...BuildArray<Base>]>;
@@ -49,7 +51,7 @@ type multipli = Multipli<2, 5>;
 type Division<
   Divide extends number,
   R extends number,
-  Result extends unknown[] = []
+  Result extends unknown[] = [],
 > = Divide extends 0
   ? getArrayLength<Result>
   : Division<Subtrac<Divide, R>, R, [unknown, ...Result]>;
@@ -60,24 +62,24 @@ type division = Division<6, 2>;
 
 type getStrLength<
   Str extends string,
-  Result extends unknown[] = []
+  Result extends unknown[] = [],
 > = Str extends `${infer First}${infer Rest}`
   ? getStrLength<Rest, [First, ...Result]>
   : getArrayLength<Result>;
 
-type res = getStrLength<"012345">;
+type res = getStrLength<'012345'>;
 
 // ?比较
 
 type GreaterThan<
   N1 extends number,
   N2 extends number,
-  CountRes extends unknown[] = []
+  CountRes extends unknown[] = [],
 > = N1 extends N2 // n1 === n2
   ? false
-  : CountRes["length"] extends N2
+  : CountRes['length'] extends N2
   ? true
-  : CountRes["length"] extends N1
+  : CountRes['length'] extends N1
   ? false
   : GreaterThan<N1, N2, [...CountRes, unknown]>;
 

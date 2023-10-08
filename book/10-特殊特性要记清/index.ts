@@ -13,9 +13,9 @@
 // ?keyof 只能拿到 class 的 public 的索引，可以用来过滤出 public 的属性。
 
 // ?https://juejin.cn/book/7047524421182947366/section/7048282437238915110 判断是否是 any 类型
-type IsAny<T> = "a" extends "b" & T ? true : false; // 交叉类型 同类型合并 不同类型丢弃
+type IsAny<T> = 'a' extends 'b' & T ? true : false; // 交叉类型 同类型合并 不同类型丢弃
 
-type res = IsAny<"">;
+type res = IsAny<''>;
 
 type IsEqual<T extends unknown, S extends unknown> = IsAny<T> extends true
   ? false
@@ -23,16 +23,20 @@ type IsEqual<T extends unknown, S extends unknown> = IsAny<T> extends true
   ? false
   : (T extends S ? true : false) & (S extends T ? true : false);
 
-type res2 = IsEqual<any, "a">;
+type res2 = IsEqual<any, 'a'>;
 
-type IsEqual2<A, B> = (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2
+type IsEqual2<A, B> = (<T>() => T extends A ? 1 : 2) extends <
+  T,
+>() => T extends B ? 1 : 2
   ? true
   : false;
 
-type IsNotEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2
+type IsNotEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <
+  T,
+>() => T extends B ? 1 : 2
   ? false
   : true;
-type res3 = IsEqual<any, "a">;
+type res3 = IsEqual<any, 'a'>;
 
 // 判断是否是联合类型
 type isUnion<A, B = A> = A extends A ? ([A] extends [B] ? false : true) : never;
@@ -43,10 +47,12 @@ type isNever<T> = [T] extends [never] ? true : false;
 // 判断tuple
 
 // ? 1. 元组也是数组 但是每个元素都是只读的
-type isTuple<T> = T extends [...tuple: infer Eles] ? IsNotEqual<Eles["length"], number> : false;
+type isTuple<T> = T extends [...tuple: infer Eles]
+  ? IsNotEqual<Eles['length'], number>
+  : false;
 
-type arrayLength = string[]["length"];
-type tupleLength = [1, 2]["length"];
+type arrayLength = string[]['length'];
+type tupleLength = [1, 2]['length'];
 
 // !如果允许父类型赋值给子类型，就叫做【逆变】。
 
@@ -54,9 +60,9 @@ type tupleLength = [1, 2]["length"];
 
 // !在 TypeScript 中【有函数参数是有逆变的性质的】，这就是说，若函数参数可能是多个类型，参数类型会变成它们的交叉类型。
 
-export type UnionToIntersection<U> = (U extends U ? (x: U) => unknown : never) extends (
-  x: infer R
-) => unknown
+export type UnionToIntersection<U> = (
+  U extends U ? (x: U) => unknown : never
+) extends (x: infer R) => unknown
   ? R
   : never;
 
